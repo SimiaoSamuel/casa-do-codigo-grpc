@@ -1,0 +1,115 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "com.zup";
+option java_outer_classname = "CasaDoCodigoGrpc";
+option objc_class_prefix = "HLW";
+
+import "google/protobuf/timestamp.proto";
+
+package com.zup;
+
+service CasaDoCodigoGrpcService {
+  rpc criaAutor(NovoAutorRequest) returns (NovoAutorResponse) {}
+  rpc criaCategoria(NovaCategoriaRequest) returns (NovaCategoriaResponse) {}
+  rpc criaLivro(NovoLivroRequest) returns (NovoLivroResponse) {}
+  rpc listaLivros(ListaLivrosRequest) returns (ListaLivrosResponse) {}
+  rpc detalhaLivro(LivroDetalheRequest) returns (LivroGrpc) {}
+}
+
+service PaisEstadoService {
+  rpc criaPais(NovoPaisRequest) returns (NovoPaisResponse) {}
+  rpc criaEstado(NovoEstadoRequest) returns (NovoEstadoResponse) {}
+  rpc detalhaPais(DetalhaPaisRequest) returns (DetalhaPaisResponse) {}
+}
+
+message NovoAutorRequest {
+  string email = 1;
+  string nome = 2;
+  string descricao = 3;
+}
+
+message NovoAutorResponse {
+  int64 id = 1;
+}
+
+message NovaCategoriaRequest {
+  string nome = 1;
+}
+
+message NovaCategoriaResponse {
+  int64 id = 1;
+}
+
+message Money {
+  int64 units = 2;
+  int32 nanos = 3;
+}
+
+message NovoLivroRequest {
+  string titulo = 1;
+  string resumo = 2;
+  string sumario = 3;
+  int32 paginas = 4;
+  string isbn = 5;
+  google.protobuf.Timestamp dataLancamento = 6;
+  int64 idCategoria = 7;
+  int64 idAutor = 8;
+}
+
+message NovoLivroResponse {
+  int64 id = 1;
+}
+
+message ListaLivrosRequest{}
+
+message ListaLivrosResponse{
+  repeated LivroGrpc listaDeLivros = 1;
+}
+
+message LivroGrpc{
+  int64 id = 1;
+  string titulo = 2;
+  string resumo = 3;
+  string sumario = 4;
+  int32 paginas = 5;
+  string isbn = 6;
+  google.protobuf.Timestamp dataLancamento = 7;
+  int64 idCategoria = 8;
+  int64 idAutor = 9;
+}
+
+message LivroDetalheRequest{
+  int64 id = 1;
+}
+
+message NovoPaisRequest{
+  string nome = 1;
+}
+
+message NovoPaisResponse{
+  int64 id = 1;
+}
+
+message NovoEstadoRequest{
+  string nome = 1;
+  int64 idPais = 2;
+}
+
+message NovoEstadoResponse{
+  int64 id = 1;
+}
+
+message DetalhaPaisRequest{
+  int64 id = 1;
+}
+
+message DetalhaPaisResponse{
+  int64 id = 1;
+  string nome = 2;
+  repeated EstadoGrpc estados = 3;
+}
+
+message EstadoGrpc{
+  string nome = 1;
+}
