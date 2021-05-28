@@ -1,6 +1,8 @@
 micronaut:
   application:
     name: casaDoCodigoGrpc
+  server:
+    port: 8086
 datasources:
   default:
     url: jdbc:h2:mem:devDb;MVCC=TRUE;LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=FALSE
@@ -13,5 +15,15 @@ jpa.default.properties.hibernate.hbm2ddl.auto: update
 
 grpc:
   server:
+    health:
+      enabled: true
     port: 3030
 
+endpoints:
+  all:
+    #port: 8085
+    sensitive: false
+  health:
+    enabled: true
+    sensitive: false
+    details-visible: ANONYMOUS

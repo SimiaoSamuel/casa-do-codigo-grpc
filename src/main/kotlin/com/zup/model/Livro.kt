@@ -90,3 +90,4 @@ fun LivroDetalheRequest.toDto(): DetalheLivroDto {
     return DetalheLivroDto(id = id)
 }
 
+
